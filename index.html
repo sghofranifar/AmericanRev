@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The American Revolution — Grade 8 GSIS</title>
+<meta name="description" content="A self-paced, source-based history unit on the American Revolution for Grade 8 at GSIS, in English with German support.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="shell topbar-row">
+    <div class="crumb">
+      <button type="button" class="home-link" id="homeBtnTop" data-nav="home" aria-label="Back to overview">⋔</button>
+      <span class="crumb-path" id="crumbPath">History · Grade 8 · GSIS</span>
+    </div>
+    <div class="topbar-controls">
+      <button type="button" class="switch-btn de" id="deBtn" aria-pressed="false">🇩🇪 Deutsche Hilfen</button>
+      <button type="button" class="switch-btn export" id="exportBtn">⬇ Export</button>
+      <button type="button" class="switch-btn" id="printBtn">🖶 Print</button>
+      <button type="button" class="switch-btn" id="teacherBtn" aria-pressed="false">⚿ Teacher</button>
+      <button type="button" class="switch-btn" id="homeBtn" data-nav="home" hidden>← Overview</button>
+    </div>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="scrollProgress"></div></div>
+</div>
+
+<main class="shell" id="mainRoot">
+
+  <div class="page active" id="page-home">
+
+    <section class="hero">
+      <div class="hero-top">
+        <span class="eyebrow">Self-paced · English-primary, German-supported</span>
+        <span class="hero-span" id="unitSpan">1765–1791</span>
+      </div>
+      <div class="hero-grid">
+        <div>
+          <h1 class="hero-title" id="unitTitleWrap">The American<br><span class="rule" id="unitTitle">Revolution</span></h1>
+          <p class="hero-sub" id="heroSubEn">A seven-unit inquiry built around real sources.</p>
+        </div>
+        <div class="hero-map" id="heroMap" aria-hidden="true"></div>
+      </div>
+      <div class="leitfrage">
+        <span class="leitfrage-label">Leading question of this unit</span>
+        <div class="leitfrage-text" id="leitfrageText"></div>
+        <div class="de-note" style="display:block;margin-top:10px;"><strong>Deutsche Hilfe</strong><span id="leitfrageDe"></span></div>
+      </div>
+      <div class="progress-summary">
+        <span class="count" id="progressCount">0 / 7 units completed</span>
+        <div class="bar"><div class="bar-fill" id="progressBarFill" style="width:0%"></div></div>
+        <div class="badge-row" id="badgeRow"></div>
+      </div>
+    </section>
+
+    <div class="intro-grid">
+      <div class="intro-block">
+        <h3>What this unit is about</h3>
+        <p id="introWhat"></p>
+      </div>
+      <div class="intro-block">
+        <h3>What you'll be able to do</h3>
+        <ul id="introSkills"></ul>
+      </div>
+    </div>
+
+    <div class="section-label">Source types</div>
+    <div class="legend">
+      <div class="legend-item"><span class="legend-swatch text"></span>Text / document</div>
+      <div class="legend-item"><span class="legend-swatch image"></span>Image / map / diagram</div>
+      <div class="legend-item"><span class="legend-swatch data"></span>Statistics / table</div>
+      <div class="legend-item"><span class="legend-swatch voice"></span>Excluded / marginalised voice</div>
+    </div>
+
+    <div class="section-label">Units</div>
+    <div class="module-grid" id="modulesGrid"></div>
+
+    <footer class="note">
+      <span>Sebastian Ghofanifar · GSIS History Grade 8</span>
+      <span>Your answers autosave to this device — use Export to keep a copy.</span>
+    </footer>
+  </div>
+
+  <!-- Module pages are rendered into this container by js/app.js on first visit -->
+
+</main>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <h3 id="modalTitle">Unlock unit</h3>
+    <p class="modal-sub" id="modalSub">Enter the code your teacher gave you.</p>
+    <input type="text" class="modal-input" id="modalInput" placeholder="e.g. STAMP-1765" autocomplete="off">
+    <div class="modal-error" id="modalError">Wrong code · Falscher Code</div>
+    <div class="modal-buttons">
+      <button type="button" class="nav-btn primary" id="modalSubmit">Unlock</button>
+      <button type="button" class="nav-btn" id="modalCancel">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/content.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
