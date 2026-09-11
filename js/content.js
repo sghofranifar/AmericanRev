@@ -60,7 +60,14 @@ var UNIT = {
         videoId: "uImdEeuLNG8",
         title: "The Stamp Act",
         citation: "NBC News Learn — YouTube",
-        whileListening: []
+        whileListening: [
+          "According to the video, why did Britain feel colonists should start paying taxes after 1763?",
+          "List three kinds of everyday items the Stamp Act taxed.",
+          "What point do the British make when colonists complain about “taxation without representation”?",
+          "Name two forms of colonial protest against the Stamp Act mentioned in the video.",
+          "Who persuaded Parliament to repeal the Stamp Act, and how?",
+          "What did Parliament pass alongside the repeal, and what did it claim?"
+        ]
       },
       sources: [
         {
@@ -192,7 +199,14 @@ var UNIT = {
             videoId: "mwqr1NQg7PM",
             title: "Common Sense by Thomas Paine",
             citation: "YouTube",
-            whileListening: []
+            whileListening: [
+              "In what year did Thomas Paine arrive in the American colonies, and what job did he take there?",
+              "What event pushed Paine to start writing Common Sense?",
+              "According to the video, what did Paine ask readers to imagine at the start of the pamphlet?",
+              "How many copies of Common Sense had sold by the end of the Revolutionary War?",
+              "What does Paine mean by “everything that is right or natural pleads for separation”?",
+              "What happened to Paine's reputation after the war, according to the video?"
+            ]
           },
           method: {
             title: "Reading a persuasive pamphlet",
@@ -270,7 +284,14 @@ var UNIT = {
             videoId: "P2GIoBO-uys",
             title: "The Declaration of Independence | Road to the Revolution",
             citation: "YouTube",
-            whileListening: []
+            whileListening: [
+              "Name the five men chosen to draft the Declaration of Independence.",
+              "How many days did the committee take to write the document?",
+              "List the four parts the video says the Declaration is organised into.",
+              "Quote or paraphrase the sentence the video calls the “Declaration of Natural Rights.”",
+              "What does the video say the “list of grievances” section does?",
+              "On what date was the Declaration formally adopted?"
+            ]
           },
           method: {
             title: "Reading a founding document",
@@ -362,7 +383,14 @@ var UNIT = {
             videoId: "V9SQ4HxnWnM",
             title: "Battles of the American Revolution | Early US History for Kids",
             citation: "YouTube",
-            whileListening: []
+            whileListening: [
+              "What happened at Lexington and Concord in April 1775, and how were the two sides matched in numbers?",
+              "Why was the Battle of Long Island (1776) a defeat for Washington even though he withdrew his troops successfully?",
+              "Which battle convinced France to support the Revolutionaries, and why was it a turning point?",
+              "What did the Continental Army prove at Stony Point in 1779?",
+              "Explain the role of the French navy at the Siege of Yorktown in 1781.",
+              "What was the final outcome of the Siege of Yorktown?"
+            ]
           },
           method: {
             title: "Reading a historical map",
