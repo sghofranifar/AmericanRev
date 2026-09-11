@@ -177,6 +177,24 @@
 
   function typeClass(t) { return t === 'image' ? 'type-image' : (t === 'data' ? 'type-data' : (t === 'voice' ? 'type-voice' : '')); }
 
+  function renderVideo(video) {
+    if (!video) return '';
+    var wl = '';
+    if (video.whileListening && video.whileListening.length) {
+      wl = '<div class="while-listening"><div class="method-box-label">While you watch</div><ol>' +
+        video.whileListening.map(function (q) { return '<li>' + esc(q) + '</li>'; }).join('') +
+        '</ol></div>';
+    }
+    return '<div class="video-embed-wrap">' +
+      '<div class="quelle-meta">▶ Watch · ' + esc(video.citation || 'Video') + '</div>' +
+      '<div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/' + esc(video.videoId) +
+      '" title="' + esc(video.title) + '" loading="lazy" ' +
+      'allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>' +
+      '<div class="quelle-source">' + esc(video.title) + '</div>' +
+      wl +
+      '</div>';
+  }
+
   function renderMethodBox(method) {
     if (!method) return '';
     return '<div class="method-box">' +
@@ -198,7 +216,7 @@
       '<div class="quelle-source">' + esc(src.citation) + '</div>' +
       media +
       '<div class="quelle-text">' + body + '</div>' +
-      '</div>' + renderMethodBox(src.method);
+      '</div>' + renderVideo(src.video) + renderMethodBox(src.method);
   }
 
   var NIVEAU_LABEL = { 1: '★ Basic', 2: '★★ Standard', 3: '★★★ Challenge' };
@@ -288,6 +306,7 @@
       m.intro_en.map(function (p) { return '<p>' + p + '</p>'; }).join('') +
       '<div class="de-note"><strong>Deutsche Hilfe · Zusammenfassung</strong>' + esc(m.intro_de) + '</div>' +
       renderVocab(m) +
+      renderVideo(m.introVideo) +
       '</section>' +
 
       '<section class="module-section">' + sourcesHtml + '</section>' +

@@ -56,6 +56,12 @@ var UNIT = {
         "By December 1773, the anger reached Boston Harbor, where colonists dumped 342 chests of British tea into the sea rather than pay the tax on it. Britain answered with punishment, not compromise — and a protest movement began sliding toward revolution."
       ],
       intro_de: "Nach dem teuren Krieg gegen Frankreich (1754–1763) verlangt Großbritannien neue Steuern von den Kolonien — ohne ihnen eine Stimme im Parlament zu geben. Der Protest eskaliert bis zur Boston Tea Party 1773.",
+      introVideo: {
+        videoId: "uImdEeuLNG8",
+        title: "The Stamp Act",
+        citation: "NBC News Learn — YouTube",
+        whileListening: []
+      },
       sources: [
         {
           id: "m1s1", type: "image",
@@ -182,6 +188,12 @@ var UNIT = {
             "“Small islands not capable of protecting themselves, are the proper objects for kingdoms to take under their care: but there is something very absurd, in supposing a Continent to be perpetually governed by an island.”",
             "Paine's pamphlet did not just argue for independence — it argued that monarchy itself was absurd, at a time when almost every colonist still assumed some form of loyalty to the crown."
           ],
+          video: {
+            videoId: "mwqr1NQg7PM",
+            title: "Common Sense by Thomas Paine",
+            citation: "YouTube",
+            whileListening: []
+          },
           method: {
             title: "Reading a persuasive pamphlet",
             steps: [
@@ -254,6 +266,12 @@ var UNIT = {
           text_en: [
             "“We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness.”"
           ],
+          video: {
+            videoId: "P2GIoBO-uys",
+            title: "The Declaration of Independence | Road to the Revolution",
+            citation: "YouTube",
+            whileListening: []
+          },
           method: {
             title: "Reading a founding document",
             steps: [
@@ -340,6 +358,12 @@ var UNIT = {
             "1777–78 — Valley Forge, Pennsylvania: a brutal winter encampment, not a battle — over 2,000 of about 12,000 soldiers die of disease and exposure.",
             "1781 — Yorktown, Virginia: trapped by Continental troops on land and the French navy at sea, General Cornwallis surrenders — effectively ending the war."
           ],
+          video: {
+            videoId: "V9SQ4HxnWnM",
+            title: "Battles of the American Revolution | Early US History for Kids",
+            citation: "YouTube",
+            whileListening: []
+          },
           method: {
             title: "Reading a historical map",
             steps: [
@@ -436,6 +460,12 @@ var UNIT = {
           text_en: [
             "Congress (legislative) makes laws — but the President (executive) can veto them, and the Supreme Court (judicial) can strike them down as unconstitutional. Each branch can check the others; no branch was meant to act entirely alone."
           ],
+          video: {
+            videoId: "efi0r5ShSkE",
+            title: "Principles of the United States Constitution",
+            citation: "YouTube",
+            whileListening: []
+          },
           method: {
             title: "Reading a constitutional diagram",
             steps: [
