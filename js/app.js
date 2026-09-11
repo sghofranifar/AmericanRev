@@ -177,16 +177,142 @@
 
   function typeClass(t) { return t === 'image' ? 'type-image' : (t === 'data' ? 'type-data' : (t === 'voice' ? 'type-voice' : '')); }
 
+  // ── While-listening task renderers (varied formats) ─────
+  function shuffled(n) {
+    var order = [];
+    for (var i = 0; i < n; i++) order.push(i);
+    for (var i = order.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = order[i]; order[i] = order[j]; order[j] = tmp;
+    }
+    return order;
+  }
+
+  function renderWlItem(item, idx, uid) {
+    var num = idx + 1;
+    var head = '<span class="wl-num">' + num + '.</span>';
+    if (item.type === 'mcq') {
+      var opts = item.options.map(function (o, j) {
+        return '<label><input type="radio" name="' + uid + '-' + idx + '" value="' + j + '"><span>' + esc(o) + '</span></label>';
+      }).join('');
+      return '<div class="wl-item wl-mcq" data-correct="' + item.correct + '">' +
+        '<div class="wl-q">' + head + '<span class="wl-tag">multiple choice</span>' + esc(item.q) + '</div>' +
+        '<div class="wl-opts">' + opts + '</div></div>';
+    }
+    if (item.type === 'truefalse') {
+      return '<div class="wl-item wl-tf" data-correct="' + item.correct + '">' +
+        '<div class="wl-q">' + head + '<span class="wl-tag">true or false</span>' + esc(item.q) + '</div>' +
+        '<div class="wl-tf-btns">' +
+        '<button type="button" class="wl-tf-btn" data-val="true">True</button>' +
+        '<button type="button" class="wl-tf-btn" data-val="false">False</button>' +
+        '</div></div>';
+    }
+    if (item.type === 'gapfill') {
+      return '<div class="wl-item wl-gap" data-accept=\'' + esc(JSON.stringify(item.accept)) + '\'>' +
+        '<div class="wl-q">' + head + '<span class="wl-tag">fill the gap</span></div>' +
+        '<div class="wl-gap-sentence">' + esc(item.before) + ' <input type="text" class="wl-gap-input" aria-label="Your answer"> ' + esc(item.after) + '</div>' +
+        '<div class="wl-gap-row"><button type="button" class="ghost-btn hint wl-gap-check">Check</button><span class="wl-gap-result"></span></div>' +
+        '</div>';
+    }
+    if (item.type === 'sequence') {
+      var n = item.items.length;
+      var order = shuffled(n);
+      var optionHtml = '<option value="">–</option>';
+      for (var k = 1; k <= n; k++) optionHtml += '<option value="' + k + '">' + k + '</option>';
+      var rows = order.map(function (origIdx) {
+        return '<li data-correct-pos="' + (origIdx + 1) + '">' +
+          '<select class="wl-seq-select" aria-label="Position">' + optionHtml + '</select>' +
+          '<span class="wl-seq-text">' + esc(item.items[origIdx]) + '</span></li>';
+      }).join('');
+      return '<div class="wl-item wl-seq">' +
+        '<div class="wl-q">' + head + '<span class="wl-tag">put in order</span>' + esc(item.prompt || 'Put these in the order they happen.') + '</div>' +
+        '<ol class="wl-seq-list">' + rows + '</ol>' +
+        '<div class="wl-gap-row"><button type="button" class="ghost-btn hint wl-seq-check">Check order</button><span class="wl-seq-result"></span></div>' +
+        '</div>';
+    }
+    return '<div class="wl-item wl-short"><div class="wl-q">' + head + '<span class="wl-tag">short answer</span>' + esc(item.q) + '</div></div>';
+  }
+
+  function wireWhileListening(root) {
+    root.querySelectorAll('.wl-mcq').forEach(function (el) {
+      var correct = parseInt(el.getAttribute('data-correct'), 10);
+      var labels = el.querySelectorAll('.wl-opts label');
+      el.querySelectorAll('input[type="radio"]').forEach(function (input) {
+        input.addEventListener('change', function () {
+          labels.forEach(function (l) { l.classList.remove('correct', 'wrong'); });
+          var chosen = parseInt(input.value, 10);
+          if (chosen === correct) input.closest('label').classList.add('correct');
+          else { input.closest('label').classList.add('wrong'); labels[correct].classList.add('correct'); }
+        });
+      });
+    });
+
+    root.querySelectorAll('.wl-tf').forEach(function (el) {
+      var correct = el.getAttribute('data-correct') === 'true';
+      var btns = el.querySelectorAll('.wl-tf-btn');
+      btns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var val = btn.getAttribute('data-val') === 'true';
+          btns.forEach(function (b) { b.classList.remove('correct', 'wrong'); });
+          if (val === correct) btn.classList.add('correct');
+          else {
+            btn.classList.add('wrong');
+            el.querySelector('[data-val="' + correct + '"]').classList.add('correct');
+          }
+        });
+      });
+    });
+
+    root.querySelectorAll('.wl-gap').forEach(function (el) {
+      var accept = [];
+      try { accept = JSON.parse(el.getAttribute('data-accept')); } catch (e) { accept = []; }
+      var input = el.querySelector('.wl-gap-input');
+      var btn = el.querySelector('.wl-gap-check');
+      var result = el.querySelector('.wl-gap-result');
+      function check() {
+        var val = input.value.trim().toLowerCase();
+        var ok = accept.some(function (a) { return a.toLowerCase() === val; });
+        result.textContent = ok ? '✓ Correct' : '✗ Not quite — try again';
+        result.className = 'wl-gap-result ' + (ok ? 'ok' : 'no');
+        input.classList.toggle('correct', ok);
+        input.classList.toggle('wrong', !ok);
+      }
+      btn.addEventListener('click', check);
+      input.addEventListener('keypress', function (e) { if (e.key === 'Enter') { e.preventDefault(); check(); } });
+    });
+
+    root.querySelectorAll('.wl-seq').forEach(function (el) {
+      var btn = el.querySelector('.wl-seq-check');
+      var result = el.querySelector('.wl-seq-result');
+      btn.addEventListener('click', function () {
+        var items = el.querySelectorAll('.wl-seq-list li');
+        var correctCount = 0;
+        items.forEach(function (li) {
+          var sel = li.querySelector('select');
+          var correctPos = li.getAttribute('data-correct-pos');
+          li.classList.remove('correct', 'wrong');
+          if (sel.value === '') return;
+          if (sel.value === correctPos) { li.classList.add('correct'); correctCount++; }
+          else li.classList.add('wrong');
+        });
+        result.textContent = correctCount + ' / ' + items.length + ' in the right place';
+      });
+    });
+  }
+
   function renderVideo(video) {
     if (!video) return '';
     var wl = '';
     if (video.whileListening && video.whileListening.length) {
-      wl = '<div class="while-listening"><div class="method-box-label">While you watch</div><ol>' +
-        video.whileListening.map(function (q) { return '<li>' + esc(q) + '</li>'; }).join('') +
-        '</ol></div>';
+      var uid = 'wl-' + video.videoId;
+      wl = '<div class="while-listening"><div class="method-box-label">While you watch</div>' +
+        video.whileListening.map(function (item, i) { return renderWlItem(item, i, uid); }).join('') +
+        '</div>';
     }
+    var note = video.note_en ? '<div class="video-note"><strong>Before you watch</strong>' + esc(video.note_en) + '</div>' : '';
     return '<div class="video-embed-wrap">' +
       '<div class="quelle-meta">▶ Watch · ' + esc(video.citation || 'Video') + '</div>' +
+      note +
       '<div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/' + esc(video.videoId) +
       '" title="' + esc(video.title) + '" loading="lazy" ' +
       'allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>' +
@@ -324,6 +450,7 @@
 
     $('mainRoot').appendChild(main);
     wireModuleInputs(m);
+    wireWhileListening(main);
   }
 
   // ============================================================

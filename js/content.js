@@ -60,13 +60,40 @@ var UNIT = {
         videoId: "uImdEeuLNG8",
         title: "The Stamp Act",
         citation: "NBC News Learn — YouTube",
+        note_en: "Fact-check before you watch: the video claims Britain spent “70 billion pounds” fighting the French and Indian War. The real figure was closer to £70–130 million — still a huge sum for the 1760s, just not a thousand times bigger. Even a good source can get a number wrong; that's worth noticing, not just watching past.",
         whileListening: [
-          "According to the video, why did Britain feel colonists should start paying taxes after 1763?",
-          "List three kinds of everyday items the Stamp Act taxed.",
-          "What point do the British make when colonists complain about “taxation without representation”?",
-          "Name two forms of colonial protest against the Stamp Act mentioned in the video.",
-          "Who persuaded Parliament to repeal the Stamp Act, and how?",
-          "What did Parliament pass alongside the repeal, and what did it claim?"
+          {
+            type: "sequence",
+            prompt: "Put these five moments in the order the video mentions them.",
+            items: [
+              "Parliament passes the Stamp Act",
+              "Colonists organise boycotts of British goods",
+              "British merchants pressure Parliament to repeal the tax",
+              "Benjamin Franklin testifies before the House of Commons",
+              "Parliament repeals the Stamp Act but passes the Declaratory Act"
+            ]
+          },
+          {
+            type: "mcq",
+            q: "What does the video say happened to stamp agents who refused to resign?",
+            options: ["They were arrested by the British army", "They faced mob violence and pressure until they resigned", "They were paid extra by Parliament to stay"],
+            correct: 1
+          },
+          {
+            type: "truefalse",
+            q: "According to the video, most people in England could vote in Parliamentary elections in the 1760s.",
+            correct: false
+          },
+          {
+            type: "gapfill",
+            before: "The Declaratory Act stated that Parliament had the right to tax the colonies “in all",
+            after: "whatsoever.”",
+            accept: ["circumstances", "cases"]
+          },
+          {
+            type: "short",
+            q: "Colonial protest targeted British merchants and goods rather than the British government directly. Using the video, explain why that strategy worked."
+          }
         ]
       },
       sources: [
@@ -200,12 +227,38 @@ var UNIT = {
             title: "Common Sense by Thomas Paine",
             citation: "YouTube",
             whileListening: [
-              "In what year did Thomas Paine arrive in the American colonies, and what job did he take there?",
-              "What event pushed Paine to start writing Common Sense?",
-              "According to the video, what did Paine ask readers to imagine at the start of the pamphlet?",
-              "How many copies of Common Sense had sold by the end of the Revolutionary War?",
-              "What does Paine mean by “everything that is right or natural pleads for separation”?",
-              "What happened to Paine's reputation after the war, according to the video?"
+              {
+                type: "gapfill",
+                before: "Thomas Paine published Common Sense on",
+                after: ", 1776.",
+                accept: ["january 10", "10 january", "jan 10", "jan. 10"]
+              },
+              {
+                type: "mcq",
+                q: "What does the video say Paine asked his readers to imagine at the start of the pamphlet?",
+                options: ["A king ruling over a small island", "A small group of people settling somewhere completely isolated from the world", "A war between France and Britain"],
+                correct: 1
+              },
+              {
+                type: "truefalse",
+                q: "According to the video, Common Sense had sold about 120,000 copies in total by the end of the Revolutionary War.",
+                correct: false
+              },
+              {
+                type: "sequence",
+                prompt: "Put these moments from Paine's life in the order the video presents them.",
+                items: [
+                  "Paine is born in England",
+                  "Paine arrives in the American colonies and becomes an editor",
+                  "The Battles of Lexington and Concord take place",
+                  "Paine publishes Common Sense",
+                  "Paine dies, with only six people at his funeral"
+                ]
+              },
+              {
+                type: "short",
+                q: "The video says Paine became “quite a pain” to the new country's leaders after the war. Based on what you know about his ideas, why might his outspokenness have made him unpopular even among fellow revolutionaries?"
+              }
             ]
           },
           method: {
@@ -285,12 +338,37 @@ var UNIT = {
             title: "The Declaration of Independence | Road to the Revolution",
             citation: "YouTube",
             whileListening: [
-              "Name the five men chosen to draft the Declaration of Independence.",
-              "How many days did the committee take to write the document?",
-              "List the four parts the video says the Declaration is organised into.",
-              "Quote or paraphrase the sentence the video calls the “Declaration of Natural Rights.”",
-              "What does the video say the “list of grievances” section does?",
-              "On what date was the Declaration formally adopted?"
+              {
+                type: "sequence",
+                prompt: "Put these steps in the order the video describes them.",
+                items: [
+                  "Congress forms a Committee of Five",
+                  "The committee drafts the document over 17 days",
+                  "The list of grievances against King George III is written",
+                  "The Declaration is formally adopted"
+                ]
+              },
+              {
+                type: "mcq",
+                q: "Who does the video identify as the leader of the drafting committee and main author?",
+                options: ["John Adams", "Benjamin Franklin", "Thomas Jefferson"],
+                correct: 2
+              },
+              {
+                type: "gapfill",
+                before: "The video says the Declaration states that the power of government comes from",
+                after: ".",
+                accept: ["the people"]
+              },
+              {
+                type: "truefalse",
+                q: "According to the video, the Declaration says people have a right to overthrow a government that abuses their rights.",
+                correct: true
+              },
+              {
+                type: "short",
+                q: "The video jokes about the “list of grievances” without reading the actual complaints aloud. Using Units 1 and 2 of this course, name one grievance colonists likely had against King George III."
+              }
             ]
           },
           method: {
@@ -384,12 +462,38 @@ var UNIT = {
             title: "Battles of the American Revolution | Early US History for Kids",
             citation: "YouTube",
             whileListening: [
-              "What happened at Lexington and Concord in April 1775, and how were the two sides matched in numbers?",
-              "Why was the Battle of Long Island (1776) a defeat for Washington even though he withdrew his troops successfully?",
-              "Which battle convinced France to support the Revolutionaries, and why was it a turning point?",
-              "What did the Continental Army prove at Stony Point in 1779?",
-              "Explain the role of the French navy at the Siege of Yorktown in 1781.",
-              "What was the final outcome of the Siege of Yorktown?"
+              {
+                type: "sequence",
+                prompt: "Put these five battles/events in the order the video mentions them.",
+                items: [
+                  "Lexington and Concord",
+                  "Battle of Bunker Hill",
+                  "Battle of Long Island",
+                  "Battle of Saratoga",
+                  "Siege of Yorktown"
+                ]
+              },
+              {
+                type: "mcq",
+                q: "What convinced France to formally support the American Revolutionaries, according to the video?",
+                options: ["The Declaration of Independence", "The defeat of the British at Saratoga", "The Battle of Bunker Hill"],
+                correct: 1
+              },
+              {
+                type: "truefalse",
+                q: "The video says the American minutemen were outnumbered at Lexington and Concord.",
+                correct: true
+              },
+              {
+                type: "gapfill",
+                before: "At the Siege of Yorktown, the",
+                after: "blocked any British escape by sea.",
+                accept: ["french navy", "french fleet"]
+              },
+              {
+                type: "short",
+                q: "The video calls Bunker Hill a British “victory” — in quotation marks. Using the casualty figures it gives, explain why it puts the word in quotes."
+              }
             ]
           },
           method: {
@@ -492,7 +596,38 @@ var UNIT = {
             videoId: "efi0r5ShSkE",
             title: "Principles of the United States Constitution",
             citation: "YouTube",
-            whileListening: []
+            whileListening: [
+              {
+                type: "gapfill",
+                before: "By 1790,",
+                after: "became the last of the thirteen states to ratify the Constitution.",
+                accept: ["rhode island"]
+              },
+              {
+                type: "mcq",
+                q: "Which opening words of the Constitution does the video use to explain popular sovereignty?",
+                options: ["“We the People”", "“In Order to form a more perfect Union”", "“Congress shall have power”"],
+                correct: 0
+              },
+              {
+                type: "truefalse",
+                q: "According to the video, in 1788 only white landowning men could vote.",
+                correct: true
+              },
+              {
+                type: "sequence",
+                prompt: "Put these three branches in the order the video introduces them.",
+                items: [
+                  "Legislative branch — makes the laws",
+                  "Executive branch — carries out the laws",
+                  "Judicial branch — interprets the laws"
+                ]
+              },
+              {
+                type: "short",
+                q: "The video explains checks and balances using Congress, the President, and the Supreme Court. Using Unit 5's diagram (Source 2), describe one more check between branches the video does not mention."
+              }
+            ]
           },
           method: {
             title: "Reading a constitutional diagram",
