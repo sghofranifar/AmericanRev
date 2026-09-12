@@ -122,8 +122,8 @@ main.shell { padding-bottom: 70px; }
 }
 .hero-title .rule { color: var(--oxide); }
 .hero-sub { font-family: var(--serif-text); font-style: italic; color: var(--ink-soft); font-size: clamp(1.02rem, 2vw, 1.2rem); max-width: 46ch; }
-.hero-map { justify-self: end; }
-.hero-map svg { width: 100%; max-width: 230px; height: auto; }
+.hero-map { justify-self: end; width: 100%; max-width: 300px; }
+.hero-map svg { width: 100%; height: auto; }
 
 .leitfrage {
   margin-top: 30px; padding: 24px 28px; background: var(--paper-raised);

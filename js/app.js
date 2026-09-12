@@ -38,17 +38,42 @@
   }
 
   // ── Small inline SVG diagrams (kept out of content.js to keep content data plain) ──
+  function starPath(cx, cy, rOuter, rInner) {
+    var pts = [];
+    for (var k = 0; k < 10; k++) {
+      var angle = (Math.PI / 5) * k - Math.PI / 2;
+      var r = (k % 2 === 0) ? rOuter : rInner;
+      pts.push((cx + r * Math.cos(angle)).toFixed(2) + ',' + (cy + r * Math.sin(angle)).toFixed(2));
+    }
+    return 'M' + pts.join('L') + 'Z';
+  }
+
   var SVG = {
-    heroMap: function () {
-      return '<svg viewBox="0 0 240 300" fill="none" role="img" aria-label="Simplified outline map of the thirteen colonies">' +
-        '<path d="M60 20 L150 15 L165 55 L190 60 L185 110 L205 130 L195 175 L170 190 L165 230 L120 260 L90 245 L70 270 L45 250 L55 210 L35 190 L45 150 L30 120 L50 90 L45 55 Z" stroke="var(--verdigris)" stroke-width="1.6" fill="var(--verdigris-soft)"/>' +
-        '<g stroke="var(--oxide)" stroke-width="1" opacity="0.85">' +
-        '<line x1="70" y1="60" x2="70" y2="235"/><line x1="95" y1="55" x2="95" y2="248"/>' +
-        '<line x1="120" y1="50" x2="120" y2="255"/><line x1="145" y1="48" x2="145" y2="245"/>' +
-        '<line x1="168" y1="55" x2="168" y2="200"/></g>' +
-        '<circle cx="107" cy="150" r="3.2" fill="var(--oxide)"/>' +
-        '<text x="115" y="153" font-family="IBM Plex Mono" font-size="9" fill="var(--ink-mute)">Philadelphia</text>' +
-        '</svg>';
+    // The Betsy Ross flag: 13 stripes, 13 stars in a ring — the flag most
+    // associated with 1776, built as real geometry rather than a photo so
+    // it always renders (no external image dependency).
+    heroFlag: function () {
+      var W = 300, H = 158;
+      var stripeH = H / 13;
+      var stripes = '';
+      for (var i = 0; i < 13; i++) {
+        var color = (i % 2 === 0) ? '#B31942' : '#FFFFFF';
+        stripes += '<rect x="0" y="' + (i * stripeH).toFixed(2) + '" width="' + W + '" height="' + (stripeH + 0.5).toFixed(2) + '" fill="' + color + '"/>';
+      }
+      var cantonW = W * 0.4, cantonH = stripeH * 7;
+      var canton = '<rect x="0" y="0" width="' + cantonW.toFixed(2) + '" height="' + cantonH.toFixed(2) + '" fill="#0A3161"/>';
+      var cx0 = cantonW / 2, cy0 = cantonH / 2;
+      var ringR = Math.min(cantonW, cantonH) * 0.34;
+      var stars = '';
+      for (var s = 0; s < 13; s++) {
+        var ang = (2 * Math.PI / 13) * s - Math.PI / 2;
+        var sx = cx0 + ringR * Math.cos(ang), sy = cy0 + ringR * Math.sin(ang);
+        stars += '<path d="' + starPath(sx, sy, 6.4, 2.5) + '" fill="#FFFFFF"/>';
+      }
+      return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" ' +
+        'aria-label="The Betsy Ross flag: thirteen white stars in a circle on a blue field, with thirteen red and white stripes" ' +
+        'style="width:100%;height:auto;display:block;border:1px solid var(--hairline-strong);border-radius:2px;">' +
+        stripes + canton + stars + '</svg>';
     },
     warMap: function () {
       var pts = [
@@ -730,7 +755,7 @@
     $('crumbPath').textContent = UNIT.meta;
     $('introWhat').textContent = UNIT.intro.what_en;
     $('introSkills').innerHTML = UNIT.intro.skills_en.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('');
-    $('heroMap').innerHTML = SVG.heroMap();
+    $('heroMap').innerHTML = SVG.heroFlag();
   }
 
   function init() {
